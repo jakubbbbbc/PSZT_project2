@@ -10,7 +10,7 @@ import pandas as pd
 import pickle
 
 
-def entropy(df: pd.DataFrame) -> int:
+def get_entropy(df: pd.DataFrame) -> int:
     """ Calculate entropy for pandas DataFrame
 
     :param df: DataFrame to calculate the entropy for
@@ -30,7 +30,7 @@ def entropy(df: pd.DataFrame) -> int:
     return entropy
 
 
-def inf(df: pd.DataFrame, col: str) -> int:
+def get_inf(df: pd.DataFrame, col: str) -> int:
     """ Calculate normalized entropy for df divided by values of col
 
     :param df: DataFrame to work on
@@ -49,7 +49,7 @@ def inf(df: pd.DataFrame, col: str) -> int:
         # create subtable where df[col]=val
         df_temp = df[df[col] == val]
         # calculate normalized entropy
-        inf += entropy(df_temp) * df_temp.shape[0] / df.shape[0]
+        inf += get_entropy(df_temp) * df_temp.shape[0] / df.shape[0]
 
     return inf
 
@@ -67,7 +67,7 @@ def best_inf_gain_att(df: pd.DataFrame) -> str:
     columns = df.columns[:-1]
     inf_gain = []
     for i, col in enumerate(columns):
-        inf_gain.append(entropy(df) - inf(df, col))
+        inf_gain.append(get_entropy(df) - get_inf(df, col))
 
     return columns[np.argmax(inf_gain)]
 
