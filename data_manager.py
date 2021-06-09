@@ -9,7 +9,6 @@ import pandas as pd
 
 def create_test_table() -> pd.DataFrame:
     """ create simple data set for tests
-
     :return df: test data set
     :rtype df: pd.DataFrame
     """
@@ -27,15 +26,14 @@ def create_test_table() -> pd.DataFrame:
     return df
 
 
-def create_prepared_table(variant: str = 'workday') -> pd.DataFrame:
+def create_prepared_table(delete, variant: str = 'workday') -> pd.DataFrame:
     """ merge and prepare two datasets from https://www.kaggle.com/uciml/student-alcohol-consumption/.
-
     Merge datasets containing information about students in a maths and Portuguese courses. Depending on the target the
     last column can be either Walc or Dalc (weekend or workday alcohol consumption, respectively)
-
     :param variant: if to prepare dataframe for predicting alcohol consumption on workdays or on weekends
     :type variant: str
-
+    :param delete: how many columns to delete, for testing purposes
+    :type delete: int
     :return df: merged and prepared dataframe to apply ID3 algorithm to
     :rtype df: pd.DataFrame
     """
@@ -45,6 +43,7 @@ def create_prepared_table(variant: str = 'workday') -> pd.DataFrame:
     columns = list(df.columns)
     # delete Walc and Dalc from the middle
     del columns[26:28]
+    del columns[:delete]
     # add column to predict
     if 'workday' == variant:
         columns.append('Dalc')

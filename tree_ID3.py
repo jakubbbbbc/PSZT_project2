@@ -12,10 +12,8 @@ import pickle
 
 def get_entropy(df: pd.DataFrame) -> int:
     """ Calculate entropy for pandas DataFrame
-
     :param df: DataFrame to calculate the entropy for
     :type df: pd.DataFrame
-
     :return entropy: calculated entropy
     :rtype entropy: int
     """
@@ -32,13 +30,10 @@ def get_entropy(df: pd.DataFrame) -> int:
 
 def get_inf(df: pd.DataFrame, col: str) -> int:
     """ Calculate normalized entropy for df divided by values of col
-
     :param df: DataFrame to work on
     :type df: pd.DataFrame
-
     :param col: column name which values are used to divide df
     :type col: str
-
     :return inf: calculated normalized entropy
     :rtype inf: int
     """
@@ -56,10 +51,8 @@ def get_inf(df: pd.DataFrame, col: str) -> int:
 
 def best_inf_gain_att(df: pd.DataFrame) -> str:
     """ determine column of df that produces best information gain
-
     :param df: DataFrame to work on
     :type df: pd.DataFrame
-
     :return: name of column offering best information gain
     :rtype: str
     """
@@ -79,10 +72,8 @@ def get_subtable(df, col, val) -> pd.DataFrame:
 
 def build_tree(df) -> dict:
     """ generate an ID3 decision tree based on df
-
     :param df: dataframe to base the tree on
     :type df: pd.DataFrame
-
     :return tree: ID3 decision tree based on df
     :rtype tree: dict
     """
@@ -115,13 +106,10 @@ def build_tree(df) -> dict:
 
 def predict_record(tree: dict, data: pd.Series):
     """ predict outcome for a data series by using an ID3 decision tree
-
     :param tree: ID3 decision tree for classification
     :type tree: dict
-
     :param data: series to base the classification on
     :type data: pd.Series
-
     :return: predicted value for the series
     :rtype: dependant on predicted value
     """
@@ -140,16 +128,12 @@ def predict_record(tree: dict, data: pd.Series):
 
 def predict_table(tree: dict, df: pd.DataFrame, col_name: str = 'predicted') -> pd.DataFrame:
     """ Predict values for a data set using an ID3 decision tree
-
     :param tree: ID3 decision tree for classification
     :type tree: dict
-
     :param df: data set to base the classification on
     :type df: pd.DataFrame
-
     :param col_name: name of the column for predicted values; if nonexistent, added
     :type col_name: str
-
     :return df_predict: df with added column of predictions
     :rtype df_predict: pd.DataFrame
     """
@@ -164,13 +148,10 @@ def predict_table(tree: dict, df: pd.DataFrame, col_name: str = 'predicted') -> 
 
 def save_tree_to_file(tree: dict, fname: str = 'tree') -> None:
     """ save decision tree to a .pkl file
-
     :param tree: tree to save
     :type tree: dict
-
     :param fname: name of the file, the tree is saved in <fname>.pkl
     :type fname: str
-
     :return: None
     """
     fid = open(fname + ".pkl", "wb")
@@ -180,10 +161,8 @@ def save_tree_to_file(tree: dict, fname: str = 'tree') -> None:
 
 def load_tree_from_file(fname: str = 'tree') -> dict:
     """ load ID3 decision tree from a .pkl file
-
     :param fname: name of the file, the tree is loaded from <fname>.pkl
     :type fname: str
-
     :return tree: ID3 decision tree
     :rtype tree: dict
     """
